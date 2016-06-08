@@ -11,20 +11,29 @@ using System.Windows.Markup;
 namespace HighLighter
 {
 
+	/// <summary>
+	/// Most of this code comes from here: http://stackoverflow.com/a/2641774. Only minor
+	/// aesthetic changes.
+	/// 
+	/// The problem that I needed solved was that the Document property of the RichTextBox
+	/// was not bindable. It would have been easy enough to handle the RichTextBox.TextChanged
+	/// event; however, that would lead to handling a change event in the code-behind, violating
+	/// my mvvm model.
+	/// </summary>
 	public class RichTextBoxHelper : DependencyObject
 	{
-		private static HashSet<Thread> _recursionProtection = new HashSet<Thread>();
+		private static readonly HashSet<Thread> RecursionProtection = new HashSet<Thread>();
 
-		public static string GetDocumentXaml(DependencyObject obj)
+		public static string GetDocumentXaml(DependencyObject dependencyObject)
 		{
-			return (string)obj.GetValue(DocumentXamlProperty);
+			return (string)dependencyObject.GetValue(DocumentXamlProperty);
 		}
 
 		public static void SetDocumentXaml(DependencyObject obj, string value)
 		{
-			_recursionProtection.Add(Thread.CurrentThread);
+			RecursionProtection.Add(Thread.CurrentThread);
 			obj.SetValue(DocumentXamlProperty, value);
-			_recursionProtection.Remove(Thread.CurrentThread);
+			RecursionProtection.Remove(Thread.CurrentThread);
 		}
 
 		public static readonly DependencyProperty DocumentXamlProperty = DependencyProperty.RegisterAttached(
@@ -36,7 +45,7 @@ namespace HighLighter
 				FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
 				(obj, e) =>
 				{
-					if (_recursionProtection.Contains(Thread.CurrentThread))
+					if (RecursionProtection.Contains(Thread.CurrentThread))
 						return;
 
 					var richTextBox = (RichTextBox)obj;

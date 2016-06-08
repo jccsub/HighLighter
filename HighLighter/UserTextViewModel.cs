@@ -1,37 +1,28 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace HighLighter
 {
 	internal class UserTextViewModel
 	{
-		public UserText UserText { get; private set; }
+		private string _text;
 
-		public UserTextViewModel()
+		public string Text
 		{
-			UserText = new UserText();
+			get { return _text; }
+			set
+			{
+				_text = value;
+				OnPropertyChanged();
+			}
 		}
 
-		private ICommand _updater;
+		public event PropertyChangedEventHandler PropertyChanged;
 
-		public ICommand UpdateCommand
+		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			get { return _updater ?? (_updater = new Updater()); }
-			set { _updater = value; }
-		}
-
-		private class Updater : ICommand
-		{
-			public bool CanExecute(object parameter)
-			{
-				return true;
-			}
-
-			public event EventHandler CanExecuteChanged;
-
-			public void Execute(object parameter)
-			{
-			}
+			if (PropertyChanged != null)
+				PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

@@ -4,7 +4,7 @@
 	{
 		public static void SetupApplication(MainWindow mainApplicationWindow)
 		{
-			var userTextViewModel = new UserText();
+			var userTextViewModel = new UserTextViewModel();
 			mainApplicationWindow.DataContext = userTextViewModel;
 		}
 	}
