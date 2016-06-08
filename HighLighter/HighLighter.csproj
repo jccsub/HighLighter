@@ -56,10 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BindableRichTextBox.cs" />
     <Compile Include="Bootstrap.cs" />
-    <Compile Include="RichTextBoxHelper.cs" />
-    <Compile Include="UserTextViewModel.cs" />
+    <Compile Include="LocatableWord.cs" />
+    <Compile Include="SocialMediaHighlighter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +91,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="patterns.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

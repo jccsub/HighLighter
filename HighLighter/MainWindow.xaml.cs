@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace HighLighter
 {
@@ -11,6 +12,7 @@ namespace HighLighter
 		public MainWindow()
 		{
 			InitializeComponent();
+
 		}
 
 	}

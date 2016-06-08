@@ -1,0 +1,19 @@
+﻿{
+  "hashTag": {
+    "pattern": "(^|\\s)(#)(\\S+)",
+    "url": "https: //www.instagram.com/tags/$3"
+  },
+  "user": {
+    "pattern": "(^|\\s)(@)(\\S+)",
+    "url": "https://www.instagram.com/$3"
+  },
+  "email": {
+    "pattern": "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$",
+    "url": "mailto://$2$3$4$5"
+  },
+  "http": {
+    "pattern": "(^|\\s+)(https?|ftp)(://[^\\s/$.?#].[^\\s]*)",
+    "url" : $2$3 
+  }
+
+}
